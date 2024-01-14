@@ -37,7 +37,7 @@ async def add(ctx, *nums):
 
 @bot.command()
 async def subtract(ctx, num1, num2):
-	result = num1 - num2
+	result = int(num1) - int(num2)
 	await ctx.send(f"Result: {result}")
 
 @bot.command()
