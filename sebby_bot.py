@@ -4,6 +4,7 @@ import discord
 BOT_TOKEN = ""
 BOT_NAME = "sebby-bot"
 
+client = discord.Client()
 bot = commands.Bot(command_prefix="?", intents=discord.Intents.all(), help_command=None)
 
 @bot.event
@@ -33,10 +34,12 @@ async def help(ctx):
     kick [USERNAME]          - kicks user
     ban [USERNAME] [REASON]  - bans user
     hello                    - says hello
-    list                     - shows this
+    help                     - shows this
     """.format(ctx.message.author), color=0xff00f6)
     await ctx.send(embed=embed)
 
+@client.event
+async def on_message(msg):
 
-
+client.run(BOT_TOKEN)
 bot.run(BOT_TOKEN)
