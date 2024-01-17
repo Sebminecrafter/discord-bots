@@ -38,9 +38,32 @@ async def kick(ctx, member:discord.Member, *, reason):
 async def mute(ctx, member:discord.Member, timelimit):
     if "s" in timelimit:
         gettime = timelimit.strip("s")
-        newtime = datetime.timedelta(seconds=int(gettime))
-    await member.edit(timed_out_until=discord.utils.utcnow() + newtime)
-    
+        if int(gettime) > 2419000:
+            await ctx.send("Mute cannot last longer than 28 days.")
+        else:
+            newtime = datetime.timedelta(seconds=int(gettime))
+            await member.edit(timed_out_until=discord.utils.utcnow() + newtime)
+    elif "m" in timelimit:
+        gettime = timelimit.strip("m")
+        if int(gettime) > 40320:
+            await ctx.send("Mute cannot last longer than 28 days.")
+        else:
+            newtime = datetime.timedelta(seconds=int(gettime*60))
+            await member.edit(timed_out_until=discord.utils.utcnow() + newtime)
+    elif "h" in timelimit:
+        gettime = timelimit.strip("h")
+        if int(gettime) > 672:
+            await ctx.send("Mute cannot last longer than 28 days.")
+        else:
+            newtime = datetime.timedelta(seconds=int(gettime*60*60))
+            await member.edit(timed_out_until=discord.utils.utcnow() + newtime)
+    elif "d" in timelimit:
+        gettime = timelimit.strip("d")
+        if int(gettime) > 28:
+            await ctx.send("Mute cannot last longer than 28 days.")
+        else:
+            newtime = datetime.timedelta(seconds=int(gettime*60*60*24))
+            await member.edit(timed_out_until=discord.utils.utcnow() + newtime)
 
 @bot.command()
 async def help(ctx):
