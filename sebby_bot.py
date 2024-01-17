@@ -66,6 +66,11 @@ async def mute(ctx, member:discord.Member, timelimit):
             await member.edit(timed_out_until=discord.utils.utcnow() + newtime)
 
 @bot.command()
+@commands.has_any_role("Admin", "ALL POWERFUL")
+async def unmute(ctx, member:discord.Member):
+    await member.edit(timed_out_until=None)
+
+@bot.command()
 async def help(ctx):
     embed=discord.Embed(title="Help", description=f"""
     Commands:
